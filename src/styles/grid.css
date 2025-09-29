@@ -1,0 +1,938 @@
+/* Header Styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo::before {
+  content: "🎵";
+  -webkit-text-fill-color: initial;
+}
+
+.settings-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+/* Category Tabs */
+.category-tabs {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.category-tab {
+  padding: 15px;
+  border-radius: 12px 12px 0 0;
+  text-align: center;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+
+.category-tab::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: currentColor;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.category-tab.active::before {
+  transform: scaleX(1);
+}
+
+.category-tab.active {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Main Board Layout */
+.main-board {
+  display: flex;
+  gap: 20px;
+}
+
+/* Sound Grid */
+.sound-grid {
+  display: grid;
+  gap: 15px;
+  flex: 1;
+}
+
+.grid-button {
+  aspect-ratio: 1;
+  border-radius: 15px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.grid-button:hover {
+  transform: scale(1.02);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.grid-button.selected {
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  transform: scale(1.02);
+}
+
+.grid-button.selected.edit-mode-active {
+  animation: editPulse 1.5s infinite;
+  border: 4px solid #feca57;
+  box-shadow: 0 0 30px rgba(254, 202, 87, 0.8);
+  transform: scale(1.05);
+}
+
+@keyframes editPulse {
+  0%, 100% {
+    box-shadow: 0 0 30px rgba(254, 202, 87, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 50px rgba(254, 202, 87, 1);
+  }
+}
+
+/* Button swapping animations */
+.grid-button.swapping-involved {
+  transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+  z-index: 10;
+}
+
+.grid-button.swapping-from {
+  animation: swapFrom 0.4s ease-in-out;
+  border: 3px solid #43e97b !important;
+  box-shadow: 0 0 25px rgba(67, 233, 123, 0.8) !important;
+}
+
+.grid-button.swapping-to {
+  animation: swapTo 0.4s ease-in-out;
+  border: 3px solid #667eea !important;
+  box-shadow: 0 0 25px rgba(102, 126, 234, 0.8) !important;
+}
+
+@keyframes swapFrom {
+  0% {
+    transform: scale(1) rotate(0deg);
+    background: inherit;
+  }
+  25% {
+    transform: scale(1.1) rotate(5deg);
+    background: linear-gradient(135deg, #43e97b, #38f9d7);
+  }
+  75% {
+    transform: scale(1.05) rotate(-3deg);
+    background: linear-gradient(135deg, #43e97b, #38f9d7);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    background: inherit;
+  }
+}
+
+@keyframes swapTo {
+  0% {
+    transform: scale(1) rotate(0deg);
+    background: inherit;
+  }
+  25% {
+    transform: scale(1.1) rotate(-5deg);
+    background: linear-gradient(135deg, #667eea, #764ba2);
+  }
+  75% {
+    transform: scale(1.05) rotate(3deg);
+    background: linear-gradient(135deg, #667eea, #764ba2);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    background: inherit;
+  }
+}
+
+.button-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  max-width: 100%;
+}
+
+.hover-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.8);
+  transition: width 0.1s ease-out;
+  z-index: 1;
+}
+
+/* Navigation Panel */
+.navigation-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 120px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  height: fit-content;
+}
+
+.nav-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 15px 10px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.nav-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.nav-button.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.nav-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nav-button.disabled:hover {
+  transform: none;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Movement Controls */
+.movement-controls {
+  margin-top: 10px;
+}
+
+.movement-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.movement-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.movement-row {
+  display: flex;
+  gap: 5px;
+}
+
+.move-btn {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.move-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.move-btn:active {
+  transform: scale(0.95);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .main-board {
+    flex-direction: column;
+  }
+
+  .navigation-panel {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .movement-controls {
+    margin-top: 0;
+    margin-left: auto;
+  }
+}
+
+/* iPad Portrait Edit Mode - Right-side panel like iPhone */
+@media (orientation: portrait) and (min-width: 481px) and (max-width: 1024px) {
+  .main-board.edit-mode {
+    flex-direction: row !important;
+    gap: 12px !important;
+    height: calc(100vh - 140px);
+  }
+
+  .sound-grid.edit-mode {
+    flex: 1;
+    gap: 8px !important;
+    overflow-y: auto;
+  }
+
+  .navigation-panel.edit-mode {
+    width: 140px !important;
+    flex-direction: column !important;
+    padding: 12px !important;
+    order: 2 !important;
+    position: relative !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 15px !important;
+    overflow-y: auto;
+    max-height: 100%;
+  }
+
+  /* Smaller buttons for iPad portrait */
+  .grid-button.edit-mode {
+    font-size: 11px !important;
+    padding: 5px !important;
+    min-height: 55px !important;
+    min-width: 55px !important;
+    aspect-ratio: 1;
+    border-radius: 10px !important;
+  }
+
+  /* Compact navigation controls for iPad */
+  .nav-button.edit-mode {
+    padding: 8px 6px !important;
+    font-size: 10px !important;
+    min-height: 36px !important;
+    margin-bottom: 6px;
+    border-radius: 8px !important;
+  }
+
+  /* Compact movement controls for iPad */
+  .movement-controls.edit-mode {
+    margin-top: 10px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  .movement-controls.edit-mode .movement-label {
+    font-size: 10px !important;
+    margin-bottom: 8px !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .movement-controls.edit-mode .movement-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 4px !important;
+    width: 100% !important;
+  }
+
+  .movement-controls.edit-mode .movement-row {
+    display: flex !important;
+    gap: 4px !important;
+    justify-content: center !important;
+  }
+
+  .move-btn.edit-mode {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 12px !important;
+    border-radius: 6px !important;
+  }
+
+  /* Compact color customization for iPad edit panel */
+  .navigation-panel.edit-mode .color-controls {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 4px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .navigation-panel.edit-mode .color-swatch {
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 6px !important;
+    min-width: 24px !important;
+    min-height: 24px !important;
+  }
+
+  .navigation-panel.edit-mode .font-size-control {
+    padding: 6px 8px !important;
+    font-size: 9px !important;
+    min-height: 28px !important;
+    margin-bottom: 4px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 15px;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+
+  .settings-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+  }
+
+  .category-tabs {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+
+  .category-tab {
+    padding: 12px 8px;
+    font-size: 12px;
+  }
+
+  .sound-grid {
+    gap: 10px;
+  }
+
+  .grid-button {
+    font-size: 10px;
+    padding: 6px;
+  }
+
+  .navigation-panel {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .nav-button {
+    padding: 12px 8px;
+    font-size: 11px;
+    min-height: 44px;
+  }
+
+  /* Make color controls more touch-friendly */
+  .color-controls {
+    gap: 12px;
+  }
+
+  .color-swatch {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* iPhone specific layout - both portrait and landscape */
+@media (max-width: 480px) and (max-height: 926px) {
+  /* iPhone edit mode - always use right-side panel */
+  .main-board.edit-mode {
+    flex-direction: row !important;
+    gap: 8px !important;
+    height: calc(100vh - 120px); /* Account for header and categories */
+  }
+
+  .sound-grid.edit-mode {
+    flex: 1;
+    gap: 6px !important;
+    overflow-y: auto;
+  }
+
+  .navigation-panel.edit-mode {
+    width: 90px !important;
+    flex-direction: column !important;
+    padding: 8px !important;
+    order: 2 !important;
+    position: relative !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 12px !important;
+    overflow-y: auto;
+    max-height: 100%;
+  }
+
+  /* Smaller buttons for iPhone */
+  .grid-button.edit-mode {
+    font-size: 9px !important;
+    padding: 3px !important;
+    min-height: 45px !important;
+    min-width: 45px !important;
+    aspect-ratio: 1;
+    border-radius: 8px !important;
+  }
+
+  /* Compact navigation controls */
+  .nav-button.edit-mode {
+    padding: 6px 4px !important;
+    font-size: 8px !important;
+    min-height: 32px !important;
+    margin-bottom: 4px;
+    border-radius: 6px !important;
+  }
+
+  /* Ultra-compact movement controls */
+  .movement-controls.edit-mode {
+    margin-top: 8px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  .movement-controls.edit-mode .movement-label {
+    font-size: 9px !important;
+    margin-bottom: 6px !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .movement-controls.edit-mode .movement-grid {
+    transform: scale(0.8) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 3px !important;
+    width: 100% !important;
+  }
+
+  .movement-controls.edit-mode .movement-row {
+    display: flex !important;
+    gap: 3px !important;
+    justify-content: center !important;
+  }
+
+  .move-btn.edit-mode {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 10px !important;
+    border-radius: 4px !important;
+  }
+
+  /* Compact color customization for iPhone edit panel */
+  .navigation-panel.edit-mode .color-controls {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 3px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .navigation-panel.edit-mode .color-swatch {
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 4px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+  }
+
+  .navigation-panel.edit-mode .font-size-control {
+    padding: 4px 6px !important;
+    font-size: 8px !important;
+    min-height: 24px !important;
+    margin-bottom: 3px !important;
+  }
+}
+
+/* iPhone Portrait - 3x5 grid */
+@media (max-width: 480px) and (orientation: portrait) {
+  .sound-grid.edit-mode {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  /* Override mobile button hiding - show all buttons for 3x5 grid */
+  .grid-button.edit-mode {
+    display: flex !important;
+  }
+
+  /* Hide buttons beyond 15 for 3x5 grid */
+  .grid-button.edit-mode:nth-child(n+16) {
+    display: none !important;
+  }
+}
+
+/* iPhone Landscape - 5x3 grid */
+@media (max-width: 926px) and (orientation: landscape) and (max-height: 480px) {
+  /* Smaller header for landscape */
+  .header {
+    margin-bottom: 15px !important;
+    padding: 12px !important;
+  }
+  .logo {
+    font-size: 20px !important;
+  }
+  .settings-btn {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 18px !important;
+  }
+
+  /* Category tabs smaller */
+  .category-tab {
+    padding: 8px !important;
+    font-size: 12px !important;
+  }
+
+  /* Normal mode - 5+1 layout with edit panel on right */
+  .main-board {
+    flex-direction: row !important;
+    gap: 10px !important;
+    height: calc(100vh - 100px);
+  }
+
+  .sound-grid {
+    flex: 1 !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 6px !important;
+  }
+
+  /* Smaller buttons for normal mode */
+  .grid-button {
+    min-height: 126px !important;
+    max-height: 126px !important;
+    min-width: 126px !important;
+    max-width: 126px !important;
+    width: 126px !important;
+    height: 126px !important;
+    font-size: 22px !important;
+    padding: 11px !important;
+    aspect-ratio: 1;
+    box-sizing: border-box !important;
+  }
+
+  /* Show first 25 buttons (5x5) in normal mode */
+  .grid-button:nth-child(n+26) {
+    display: none !important;
+  }
+
+  /* Navigation panel on right in normal mode */
+  .navigation-panel {
+    width: 100px !important;
+    flex-direction: column !important;
+    padding: 8px !important;
+    order: 2 !important;
+    position: relative !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 12px !important;
+    bottom: unset !important;
+  }
+
+  .nav-button {
+    padding: 8px 4px !important;
+    font-size: 9px !important;
+    min-height: 36px !important;
+    margin-bottom: 6px !important;
+    border-radius: 8px !important;
+  }
+
+  /* Edit mode styles */
+  .sound-grid.edit-mode {
+    grid-template-columns: repeat(5, 1fr) !important;
+  }
+
+  /* Show first 25 buttons (5x5) */
+  .grid-button.edit-mode:nth-child(n+26) {
+    display: none !important;
+  }
+
+  /* Even smaller buttons for landscape edit mode */
+  .grid-button.edit-mode {
+    min-height: 120px !important;
+    max-height: 120px !important;
+    min-width: 120px !important;
+    max-width: 120px !important;
+    width: 120px !important;
+    height: 120px !important;
+    font-size: 20px !important;
+    padding: 8px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Landscape adjustments for edit panel */
+  .navigation-panel.edit-mode {
+    width: 80px !important;
+    padding: 6px !important;
+  }
+
+  .nav-button.edit-mode {
+    padding: 4px 2px !important;
+    font-size: 7px !important;
+    min-height: 28px !important;
+  }
+
+  .move-btn.edit-mode {
+    width: 20px !important;
+    height: 20px !important;
+    font-size: 8px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .settings-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .category-tabs {
+    gap: 5px;
+  }
+
+  .category-tab {
+    padding: 10px 5px;
+    font-size: 11px;
+    border-radius: 8px 8px 0 0;
+  }
+
+  /* Mobile adaptive grid - force 3x3 regardless of setting */
+  .sound-grid {
+    gap: 12px;
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  .grid-button {
+    font-size: 12px;
+    padding: 8px;
+    border-radius: 12px;
+    min-height: 80px;
+    min-width: 80px;
+  }
+
+  .grid-button .emoji {
+    font-size: 24px;
+  }
+
+  .grid-button .label {
+    font-size: 10px;
+    line-height: 1.2;
+  }
+
+  .movement-grid {
+    transform: scale(0.9);
+  }
+
+  /* iPhone should show 3x5 grid (15 buttons) in both modes, other mobile devices show 3x3 */
+  .grid-button:nth-child(n+16) {
+    display: none;
+  }
+
+  /* Mobile navigation improvements */
+  .navigation-panel {
+    padding: 8px;
+    border-radius: 12px 12px 0 0;
+    position: sticky;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+  }
+
+  .nav-button {
+    padding: 10px 6px;
+    font-size: 10px;
+    min-height: 44px;
+    border-radius: 8px;
+  }
+
+  /* Stack movement controls vertically on mobile */
+  .movement-controls {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .movement-controls .move-btn {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 8px;
+  }
+
+  /* Compact color controls for mobile */
+  .color-controls {
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .color-swatch {
+    min-width: 36px;
+    min-height: 36px;
+    border-radius: 8px;
+  }
+
+  /* Make font size controls touch-friendly */
+  .font-size-control {
+    min-height: 44px;
+    padding: 8px 12px;
+  }
+
+  /* Mobile portrait edit mode - edit panel below grid (for larger phones, not iPhone) */
+  .main-board.edit-mode:not(.iphone-layout) {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .sound-grid.edit-mode:not(.iphone-layout) {
+    order: 1;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 10px;
+  }
+
+  .navigation-panel.edit-mode:not(.iphone-layout) {
+    order: 2;
+    position: relative;
+    width: 100%;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 15px;
+  }
+
+  .grid-button.edit-mode:not(.iphone-layout) {
+    min-height: 70px;
+    min-width: 70px;
+    font-size: 11px;
+    padding: 6px;
+  }
+}
+
+/* Small tablet breakpoint - 4x4 grid */
+@media (min-width: 481px) and (max-width: 768px) {
+  .sound-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 10px;
+  }
+
+  .grid-button {
+    font-size: 11px;
+    padding: 6px;
+    min-height: 70px;
+    min-width: 70px;
+  }
+
+  .grid-button .emoji {
+    font-size: 20px;
+  }
+
+  /* Hide buttons beyond 4x4 for tablets */
+  .grid-button:nth-child(n+17) {
+    display: none;
+  }
+}
+
+/* Large tablet breakpoint - 5x5 grid */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .sound-grid {
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 10px;
+  }
+
+  .grid-button {
+    font-size: 12px;
+    padding: 8px;
+    min-height: 75px;
+    min-width: 75px;
+  }
+
+  /* Hide buttons beyond 5x5 for large tablets */
+  .grid-button:nth-child(n+26) {
+    display: none;
+  }
+}
+
+/* Pulse animation for enable audio button */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 165, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 165, 0, 0);
+  }
+}
