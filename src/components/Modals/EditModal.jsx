@@ -201,7 +201,6 @@ const EditModal = ({ buttonData, onSave, onClose, settings, onPlayButtonAudio, a
   };
 
   const handleSave = async () => {
-    console.log('🔧 Starting handleSave...');
 
     // Extract clean label without tags for display
     const cleanLabel = formData.label.replace(/\[[^\]]*\]/g, '').trim();
@@ -221,37 +220,29 @@ const EditModal = ({ buttonData, onSave, onClose, settings, onPlayButtonAudio, a
 
     // Save the audio file (should be instant if pre-saved during test)
     try {
-      console.log('💾 Saving audio for button:', buttonId);
       const saveStartTime = performance.now();
 
       // Save audio based on localStorage setting
       if (updatedData.localStorage) {
         if (updatedData.type === 'speech') {
-          console.log('🗣️ Speech with local storage enabled - saving to cache');
           if (lastGeneratedAudio && lastGeneratedAudio.audioBlob) {
-            console.log('💾 Using cached audio blob from test');
             await savePreGeneratedAudio(updatedData, lastGeneratedAudio.audioBlob);
           } else {
-            console.log('⚠️ No cached audio found, generating and saving new audio');
             await saveButtonAudio(updatedData);
           }
         } else {
           // For music/sound effects with localStorage on, use cached audio if available
           if (lastGeneratedAudio && lastGeneratedAudio.audioBlob) {
-            console.log('🎵 Using cached audio blob from test - no regeneration needed!');
             await savePreGeneratedAudio(updatedData, lastGeneratedAudio.audioBlob);
           } else {
-            console.log('⚠️ No cached audio found, generating new audio');
             await saveButtonAudio(updatedData);
           }
         }
       } else {
-        console.log('🔄 Local storage disabled - audio will be generated fresh each time');
         // Don't save to storage, audio will be generated fresh each playback
       }
 
       const totalTime = performance.now() - saveStartTime;
-      console.log(`✅ Save completed in: ${totalTime.toFixed(2)}ms`);
     } catch (error) {
       console.error('Failed to save audio:', error);
     }

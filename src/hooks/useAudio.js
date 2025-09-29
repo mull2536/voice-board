@@ -41,7 +41,6 @@ export function useAudio(settings) {
         buttonId: buttonId
       });
 
-      console.log(`Audio stored in IndexedDB with ID: ${audioId}`);
       return true;
     } catch (error) {
       console.error('Error saving audio file:', error);
@@ -71,7 +70,6 @@ export function useAudio(settings) {
 
     // If already loading, stop current operation first
     if (isLoading) {
-      console.log('🛑 Stopping current audio operation to start new one');
       if (currentAudio.current) {
         currentAudio.current.pause();
         currentAudio.current = null;
@@ -97,7 +95,6 @@ export function useAudio(settings) {
 
         // Show specific loading message for music
         if (buttonData.type === 'music') {
-          console.log('🎵 Generating music... This may take 30-60 seconds');
         }
 
         const audioBlob = await generateAudio(buttonData);
@@ -108,11 +105,9 @@ export function useAudio(settings) {
         setTimeout(() => URL.revokeObjectURL(audioUrl), 1000);
       } else {
         // BUTTON CLICK WITH LOCAL STORAGE: Try to play stored file, generate if not exists
-        console.log('🔍 Checking if audio file exists for button:', buttonId);
         const fileExists = await audioFileExists(buttonId);
 
         if (fileExists) {
-          console.log(`Playing stored audio from IndexedDB for button: ${buttonId}`);
           const audioId = AudioStorageService.generateAudioId(buttonId);
           const audioData = await audioStorage.current.getAudio(audioId);
           if (audioData && audioData.blob) {
@@ -121,12 +116,10 @@ export function useAudio(settings) {
             setTimeout(() => AudioStorageService.revokeAudioUrl(audioUrl), 1000);
           }
         } else {
-          console.log(`No stored audio found for button ${buttonId}, generating and storing new audio`);
 
           // Show specific loading message for music
           if (buttonData.type === 'music') {
-            console.log('🎵 Generating music... This may take 30-60 seconds');
-          }
+            }
 
             const audioBlob = await generateAudio(buttonData);
   
@@ -135,13 +128,11 @@ export function useAudio(settings) {
           setTimeout(() => URL.revokeObjectURL(audioUrl), 1000);
 
           // Auto-save the generated audio for future use
-          console.log('💾 Storing audio for future use...');
           await saveAudioFile(buttonId, audioBlob, {
             type: buttonData.type,
             label: buttonData.label || buttonData.content,
             content: buttonData.content
           });
-          console.log('✅ Audio stored successfully');
         }
       }
 
@@ -170,12 +161,10 @@ export function useAudio(settings) {
 
     // Only save audio files when localStorage is enabled
     if (!hasLocalStorage) {
-      console.log('Local storage disabled - audio not saved');
       return true; // Return true since this is expected behavior
     }
 
     try {
-      console.log(`Saving audio for button ${buttonData.id}:`, buttonData.content);
       const audioBlob = await generateAudio(buttonData);
       const saved = await saveAudioFile(buttonData.id, audioBlob, {
         type: buttonData.type,
@@ -184,7 +173,6 @@ export function useAudio(settings) {
         audioTag: buttonData.audioTag || ''
       });
       if (saved) {
-        console.log(`Audio saved successfully for button ${buttonData.id}`);
       }
       return saved;
     } catch (err) {
@@ -206,12 +194,10 @@ export function useAudio(settings) {
 
     // Only save audio files when localStorage is enabled
     if (!hasLocalStorage) {
-      console.log('Local storage disabled - pre-generated audio not saved');
       return true;
     }
 
     try {
-      console.log(`Saving pre-generated audio for button ${buttonData.id}`);
       const saved = await saveAudioFile(buttonData.id, audioBlob, {
         type: buttonData.type,
         label: buttonData.label || buttonData.content,
@@ -219,7 +205,6 @@ export function useAudio(settings) {
         audioTag: buttonData.audioTag || ''
       });
       if (saved) {
-        console.log(`Pre-generated audio saved successfully for button ${buttonData.id}`);
       }
       return saved;
     } catch (err) {
@@ -244,11 +229,9 @@ export function useAudio(settings) {
           audioBlob = await generateSpeech(buttonData);
           break;
         case 'sound_effect':
-          console.log('🔊 Calling generateSoundEffect...');
           audioBlob = await generateSoundEffect(buttonData);
           break;
         case 'music':
-          console.log('🎵 Calling generateMusic...');
           audioBlob = await generateMusic(buttonData);
           break;
         default:
@@ -287,9 +270,6 @@ export function useAudio(settings) {
    * Generate sound effect
    */
   const generateSoundEffect = useCallback(async (buttonData) => {
-    console.log('🔊 Making Sound Effect API call...');
-    console.log('Content:', buttonData.content);
-    console.log('Duration:', buttonData.duration || 5);
 
     const audioBlob = await elevenLabsService.current.generateSoundEffect(
       buttonData.content,
@@ -298,7 +278,6 @@ export function useAudio(settings) {
         loop: buttonData.loop || false
       }
     );
-    console.log('✅ Sound Effect API call completed');
     return audioBlob;
   }, []);
 
@@ -306,10 +285,6 @@ export function useAudio(settings) {
    * Generate music
    */
   const generateMusic = useCallback(async (buttonData) => {
-    console.log('🎵 Making Music API call...');
-    console.log('Content:', buttonData.content);
-    console.log('Duration:', buttonData.duration || 30);
-    console.log('Force Instrumental:', buttonData.forceInstrumental || false);
 
     const audioBlob = await elevenLabsService.current.generateMusic(
       buttonData.content,
@@ -318,7 +293,6 @@ export function useAudio(settings) {
         forceInstrumental: buttonData.forceInstrumental || false
       }
     );
-    console.log('✅ Music API call completed');
     return audioBlob;
   }, []);
 
@@ -381,7 +355,6 @@ export function useAudio(settings) {
     }
     // Always reset loading state when stopping audio
     setIsLoading(false);
-    console.log('🛑 Audio stopped and loading state cleared');
   }, []);
 
   /**
@@ -472,10 +445,8 @@ export function useAudio(settings) {
     try {
       if (audioStorage.current) {
         // Remove any speech audio files that shouldn't be stored
-        console.log('🧹 Cleaning up speech files from IndexedDB...');
         await audioStorage.current.cleanupSpeechFiles();
       }
-      console.log('✅ Audio cache cleared');
     } catch (err) {
       console.error('Failed to clear cache:', err);
       throw err;

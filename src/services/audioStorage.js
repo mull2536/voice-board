@@ -72,7 +72,6 @@ class AudioStorageService {
       const request = store.put(audioData);
 
       request.onsuccess = () => {
-        console.log(`Audio stored with ID: ${id}`);
         resolve(id);
       };
 
