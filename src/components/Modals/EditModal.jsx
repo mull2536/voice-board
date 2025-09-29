@@ -19,6 +19,7 @@ const EditModal = ({ buttonData, onSave, onClose, settings, onPlayButtonAudio, a
       emoji: buttonData?.emoji || '',
       duration: buttonData?.duration || (buttonData?.type === 'music' ? 30 : undefined),
       loop: buttonData?.loop || false,
+      forceInstrumental: buttonData?.forceInstrumental || false,
       localStorage: buttonData?.localStorage !== undefined ? buttonData.localStorage : (buttonData?.type === 'speech' ? false : true)
     };
   });
@@ -184,7 +185,8 @@ const EditModal = ({ buttonData, onSave, onClose, settings, onPlayButtonAudio, a
           label: cleanLabel,
           audioTag: '',
           id: buttonId,
-          duration: formData.duration || (formData.type === 'music' ? 30 : 5)
+          duration: formData.duration || (formData.type === 'music' ? 30 : 5),
+          forceInstrumental: formData.forceInstrumental
         };
 
         // Use playButtonAudio for proper loading states and visual timer
@@ -214,6 +216,7 @@ const EditModal = ({ buttonData, onSave, onClose, settings, onPlayButtonAudio, a
       emoji: formData.emoji,
       duration: formData.duration,
       loop: formData.loop,
+      forceInstrumental: formData.forceInstrumental,
       localStorage: formData.localStorage,
       id: buttonId
     };
@@ -828,30 +831,68 @@ const EditModal = ({ buttonData, onSave, onClose, settings, onPlayButtonAudio, a
           )}
         </div>
 
-        {/* Duration (for music only) */}
+        {/* Music Duration and Instrumental Toggle (for music only) */}
         {formData.type === 'music' && (
           <div style={{ marginBottom: '15px' }}>
-            <label style={{ color: '#aaa', fontSize: '14px' }}>Music Duration:</label>
-            <select
-              value={formData.duration}
-              onChange={(e) => handleInputChange('duration', parseInt(e.target.value))}
-              style={{
-                width: '100%',
-                padding: '8px',
-                background: 'rgba(255,255,255,0.1)',
-                border: '1px solid rgba(255,255,255,0.2)',
-                borderRadius: '5px',
-                color: 'white',
-                fontSize: '14px'
-              }}
-            >
-              <option value={10} style={{ background: '#2a2a3a', color: 'white' }}>🎵 10 seconds</option>
-              <option value={30} style={{ background: '#2a2a3a', color: 'white' }}>🎵 30 seconds</option>
-              <option value={60} style={{ background: '#2a2a3a', color: 'white' }}>🎵 1 minute</option>
-              <option value={90} style={{ background: '#2a2a3a', color: 'white' }}>🎵 1 minute 30 seconds</option>
-              <option value={120} style={{ background: '#2a2a3a', color: 'white' }}>🎵 2 minutes</option>
-              <option value={180} style={{ background: '#2a2a3a', color: 'white' }}>🎵 3 minutes</option>
-            </select>
+            <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
+              {/* Music Duration Section */}
+              <div style={{ flex: '1' }}>
+                <label style={{ color: '#aaa', fontSize: '14px', marginBottom: '8px', display: 'block' }}>Music Duration:</label>
+                <select
+                  value={formData.duration}
+                  onChange={(e) => handleInputChange('duration', parseInt(e.target.value))}
+                  style={{
+                    width: '100%',
+                    padding: '8px',
+                    background: 'rgba(255,255,255,0.1)',
+                    border: '1px solid rgba(255,255,255,0.2)',
+                    borderRadius: '5px',
+                    color: 'white',
+                    fontSize: '14px'
+                  }}
+                >
+                  <option value={10} style={{ background: '#2a2a3a', color: 'white' }}>🎵 10 seconds</option>
+                  <option value={30} style={{ background: '#2a2a3a', color: 'white' }}>🎵 30 seconds</option>
+                  <option value={60} style={{ background: '#2a2a3a', color: 'white' }}>🎵 1 minute</option>
+                  <option value={90} style={{ background: '#2a2a3a', color: 'white' }}>🎵 1 minute 30 seconds</option>
+                  <option value={120} style={{ background: '#2a2a3a', color: 'white' }}>🎵 2 minutes</option>
+                  <option value={180} style={{ background: '#2a2a3a', color: 'white' }}>🎵 3 minutes</option>
+                </select>
+              </div>
+
+              {/* Instrumental Toggle Section */}
+              <div style={{ minWidth: '120px' }}>
+                <label style={{ color: '#aaa', fontSize: '14px', marginBottom: '8px', display: 'block', textAlign: 'center' }}>
+                  Instrumental Only:
+                </label>
+                <label style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  background: formData.forceInstrumental ? 'rgba(0,255,0,0.2)' : 'rgba(255,255,255,0.1)',
+                  padding: '8px 12px',
+                  borderRadius: '5px',
+                  border: `1px solid ${formData.forceInstrumental ? 'rgba(0,255,0,0.4)' : 'rgba(255,255,255,0.2)'}`,
+                  transition: 'all 0.3s ease',
+                  height: '34px', // Match select height
+                  boxSizing: 'border-box'
+                }}>
+                  <input
+                    type="checkbox"
+                    checked={formData.forceInstrumental}
+                    onChange={(e) => handleInputChange('forceInstrumental', e.target.checked)}
+                    style={{
+                      marginRight: '6px',
+                      transform: 'scale(1.2)'
+                    }}
+                  />
+                  <span style={{ fontSize: '12px', color: 'white', fontWeight: '500' }}>
+                    {formData.forceInstrumental ? 'ON' : 'OFF'}
+                  </span>
+                </label>
+              </div>
+            </div>
           </div>
         )}
 
