@@ -13,7 +13,7 @@ const SoundGrid = ({
   onHoverProgress,
   swappingButtons,
   categoryCustomizations,
-  hoverActivation = true
+  hoverActivation = false
 }) => {
   // Ensure we have the right number of buttons for the grid
   const totalButtons = gridSize * gridSize;

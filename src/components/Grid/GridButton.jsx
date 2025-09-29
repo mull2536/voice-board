@@ -15,7 +15,7 @@ const GridButton = ({
   isSwappingTo = false,
   isInvolvedInSwap = false,
   categoryCustomizations,
-  hoverActivation = true
+  hoverActivation = false
 }) => {
   const [hoverProgress, setHoverProgress] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
