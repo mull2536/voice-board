@@ -1,0 +1,1 @@
+console.log('Clearing voice board data...'); localStorage.removeItem('voiceBoard_gridData'); localStorage.removeItem('voiceBoard_categoryNames'); console.log('Voice board data cleared\! Refresh the page.');
