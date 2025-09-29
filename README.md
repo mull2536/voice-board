@@ -1,223 +1,168 @@
-# Voice Command Board
+# Voice Board
 
-A React-based assistive communication tool that uses ElevenLabs AI to generate speech, sound effects, and music through an intuitive grid interface. Designed for users with motor limitations who need enhanced communication support.
+An assistive communication tool powered by ElevenLabs AI that transforms text into speech, sound effects, and music. Access it online for free - no installation required.
 
-## 🎯 Features
+## 🌐 Try It Online
 
-### Core Functionality
-- **Adaptive Grid Layout**: Customizable grid size (3x3 to 6x6) with responsive design
-- **5 Categories**: Basic needs, emotions, responses, requests, and fun interactions
-- **Hover Activation**: Optional eye gaze simulation with configurable hover duration
-- **Advanced Edit Mode**: Button repositioning, single-click editing, and comprehensive customization
-- **Mobile Optimized**: Dedicated layouts for iPhone and iPad in both portrait and landscape
+**[Open Voice Board](https://mull2536.github.io/voice-board)**
 
-### ElevenLabs AI Integration
-- **Text-to-Speech**: Emotional audio tags ([laughing], [excited], [sighing], etc.)
-- **Sound Effects**: Generate 0.5-30 second custom audio clips
-- **Music Composition**: Create songs up to 3 minutes with custom prompts
-- **Local Storage**: Client-side audio caching for offline playback
+You need an ElevenLabs API key - simply paste it in settings, save, and you're good to go. Works on desktop, tablet, and mobile devices. Best experienced in Chrome, Firefox, or Safari.
 
-### Accessibility Features
-- **Dark Theme**: Eye-strain reduction with soft colored categories
-- **Fully Responsive**: Optimized layouts for desktop, tablet, and mobile devices
-- **Motor Accessibility**: Optional hover-based activation for limited mobility
-- **Visual Feedback**: Progress indicators and clear button states
-- **Touch-Friendly**: 44px minimum touch targets on mobile devices
-- **Category Customization**: Custom colors, fonts, and button styling per category
+## 🎯 What is Voice Board?
+
+Voice Board is a communication aid designed for people with speech or motor limitations. It provides a customizable grid of buttons that generate speech, sound effects, or music when activated using ElevenLabs' advanced AI technology. Perfect for:
+
+- Individuals with speech impairments
+- People with motor disabilities
+- Assisted communication scenarios
+- Educational settings
+- Anyone needing quick audio generation with emotional expression
 
 ## 🚀 Getting Started
 
-### Prerequisites
+1. **Visit the app**: [https://mull2536.github.io/voice-board](https://mull2536.github.io/voice-board)
+2. **Get your API key**: Sign up at [ElevenLabs](https://elevenlabs.io/) (free tier available)
+3. **Configure**: Click the settings icon (⚙️) and enter your API key
+4. **Choose your voice**: Or leave default voice on
+5. **Start using**: Click buttons to generate audio instantly
 
-- Node.js (version 14 or higher)
-- npm or yarn
-- ElevenLabs API key ([Get one here](https://elevenlabs.io/))
+The app uses Elevenlabs v3 model, which is currently in alpha. 
+Using your cloned voice may sound differently. 
 
-### Installation
+## 📖 User Guide
 
-1. **Clone or download the project**
-   ```bash
-   cd voice-board
-   ```
+### Basic Usage
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+- **Click buttons** to play their assigned audio
+- **Switch categories** using the colored tabs at the top
+- **Adjust volume** in the settings menu
+- **Enable hover mode** for hands-free activation (desktop only)
 
-3. **Start the development server**
-   ```bash
-   npm start
-   ```
+### Edit Mode
 
-4. **Open your browser**
-   Navigate to `http://localhost:3000`
+1. Click the **"Edit"** button in the control panel
+2. Select any button to modify it
+3. Click **"Configure"** to change:
+   - Button text and emoji
+   - Audio type (Speech, Sound Effect, or Music)
+   - Special effects and duration
+4. Use arrow buttons to **rearrange** button positions
+5. Click **"Edit"** again to exit edit mode
 
-### Production Build
+### Button Types
 
-```bash
-npm run build
-```
+#### 🗣️ Speech with Emotional Expression
+Powered by **ElevenLabs v3 Turbo model**, which supports advanced emotional audio tags for natural, expressive speech:
 
-This creates a `build` folder with optimized files ready for deployment.
+- Add emotions using square bracket tags
+- Supported emotions include:
+  - `[laughing]` - Adds laughter to speech
+  - `[excited]` - Energetic, enthusiastic tone
+  - `[whispering]` - Soft, quiet delivery
+  - `[sighing]` - Tired or resigned expression
+  - `[calmly]` - Peaceful, measured speech
+  - `[yelling]` - Loud, forceful delivery
+  - `[crying]` - Emotional, tearful voice
+  - `[nervously]` - Anxious, hesitant tone
+  - `[cheerful]` - Happy, upbeat expression
+  - `[angry]` - Frustrated, aggressive tone
+  - `[singing]` - Melodic delivery
+  - `[coughing]` - Adds cough sounds
 
-## ⚙️ Configuration
+**Examples:**
+- `[excited] I can't wait to see you!`
+- `[whispering] It's a secret`
+- `[laughing] That's so funny!`
+- Multiple tags: `[calmly] Hello there. [excited] How are you today?`
 
-### ElevenLabs API Setup
+#### 🔊 Sound Effects
+ElevenLabs AI creates custom sound effects from text descriptions:
+- Duration: 0.5 to 30 seconds
+- Examples: "doorbell ringing", "rain on window", "cat meowing"
 
-1. **Get API Key**
-   - Sign up at [ElevenLabs](https://elevenlabs.io/)
-   - Go to your profile settings
-   - Copy your API key
+#### 🎵 Music Generation
+ElevenLabs AI composes original music from text prompts:
+- Duration: 10 seconds to 3 minutes
+- Examples: "upbeat jazz piano", "relaxing ambient sounds", "happy birthday song"
 
-2. **Configure in App**
-   - Click the settings gear icon in the top-right
-   - Paste your API key in the "API Key" field
-   - Select your preferred voice and audio quality
-   - Save settings
+## ⚙️ Features
 
-### Grid Customization
+### Accessibility Options
+- **Hover Activation**: Activate buttons by hovering (adjustable delay)
+- **Custom Grid Size**: Choose from 3x3 to 6x6 layouts
+- **Mobile Optimized**: Automatic layout adjustment for phones and tablets
+- **Visual Feedback**: Clear button states and progress indicators
 
-1. **Enter Edit Mode**
-   - Click the "Edit" button in the navigation panel
-   - Select buttons by clicking on them
+### Customization
+- **Category Colors**: Personalize each category's appearance
+- **Font Settings**: Adjust text size and color
+- **Button Content**: Full control over text, emojis, and audio
+- **Voice Selection**: Choose from multiple ElevenLabs voices
+- **Local Storage**: Option to save audio for offline playback
 
-2. **Edit Button Content**
-   - Select a button and click "Configure"
-   - Choose button type (Speech, Sound Effect, Music)
-   - Enter content and customize settings
+### Data Management
+- **Export/Import**: Save and restore your complete setup
+- **Backup**: All settings saved automatically in your browser
+- **Privacy**: No data sent to servers (except to ElevenLabs for audio generation)
 
-3. **Move Buttons**
-   - Use arrow buttons to rearrange selected buttons
-   - Drag-and-drop functionality coming soon
+## 💡 Tips for Different Users
 
-## 🎵 Button Types
+### For Individuals with Motor Limitations
+- Enable **hover activation** in settings
+- Adjust the **hover duration** to match your needs
+- Use a larger grid size for easier targeting
+- Position frequently used items in easily accessible spots
 
-### Speech Buttons
-- Convert text to speech with emotional audio tags
-- Supported tags: [laughing], [excited], [sighing], [calmly], [yelling], etc.
-- Example: `[excited] I am so happy to see you!`
+### For Caregivers & Support Staff
+- Customize buttons based on individual needs
+- Use emotional tags to add expression to speech
+- Create situation-specific layouts (meals, activities, medical)
+- Test audio generation before important use
+- Export configurations for backup
 
-### Sound Effect Buttons
-- Generate custom sound effects from text prompts
-- Duration: 0.5 - 30 seconds
-- Loop option available
-- Examples: "birds chirping", "rain falling", "doorbell ringing"
+### For Mobile Users
+- The app automatically adjusts for touch screens
+- Use landscape mode for more buttons
+- Pinch to zoom if needed
+- Add to home screen for quick access
 
-### Music Buttons
-- Create custom music from text descriptions
-- Duration: 10 seconds - 3 minutes
-- Instrumental or vocal options
-- Examples: "happy birthday song", "relaxing piano melody"
+## ❓ Troubleshooting
 
-## 🎨 Categories
+**No sound playing?**
+- Check your ElevenLabs API key is entered correctly
+- Ensure device volume is turned up
+- Verify you have API credits remaining
+- Try refreshing the page
 
-### Basic (Purple/Blue)
-Essential communication needs like help, thank you, yes/no, water, food, etc.
+**Buttons not working?**
+- Make sure you're not in Edit Mode
+- Check your internet connection
+- Clear browser cache if issues persist
 
-### Emotions (Pink/Red)
-Emotional expressions including happy, sad, excited, worried, angry, etc.
-
-### Needs (Blue/Cyan)
-Physical and comfort requirements like more light, blanket, bathroom, etc.
-
-### Responses (Green/Teal)
-Common responses and acknowledgments like OK, maybe, I don't know, etc.
-
-### Fun (Orange/Yellow)
-Entertainment and playful interactions including jokes, songs, games, etc.
-
-## 📱 Usage Tips
-
-### For Users with Limited Mobility
-- **Hover Activation**: Enable/disable in settings - automatically disabled on mobile
-- **Hover Duration**: Adjust activation time (500ms - 5000ms)
-- **Eye Gaze Simulation**: Hover over buttons to activate automatically
-- **Adaptive Button Sizes**: Grid scales appropriately for device and screen size
-- **Visual Feedback**: Progress bar shows activation progress
-- **Single-Click Editing**: Click active category tabs to rename them
-
-### For Caregivers
-- **Edit Mode**: Customize buttons for specific needs
-- **Categories**: Organize content by communication type
-- **Volume Control**: Adjust audio levels in settings
-- **Category Customization**: Change colors, fonts, and styling per category
-- **Backup**: Settings and audio stored locally in browser
-- **Data Management**: Export/import settings and configurations
-
-### Mobile & Tablet Experience
-- **iPhone Portrait**: 3x5 grid with right-side edit panel
-- **iPhone Landscape**: 5x5 grid with compact navigation
-- **iPad Support**: Optimized layouts for both orientations
-- **Auto-Detection**: Hover activation automatically disabled on touch devices
-- **Touch Targets**: All buttons meet 44px minimum size for accessibility
-
-### Troubleshooting
-
-**Audio not playing?**
-- Check API key is entered correctly
-- Verify internet connection
-- Check browser audio permissions
-
-**Buttons not responding?**
-- Disable edit mode for normal operation
-- Check hover duration settings
-- Ensure JavaScript is enabled
-
-**Performance issues?**
-- Clear audio cache in browser settings
+**Slow performance?**
+- Music generation can take 30-60 seconds
 - Reduce grid size in settings
-- Close other browser tabs
+- Clear stored audio if using local storage
+- Try a different browser
 
-## 🔒 Privacy & Storage
+## 🔒 Privacy & Security
 
-- **Local Storage**: All settings and audio files stored locally
-- **No Backend**: Pure frontend application, no server required
-- **API Calls**: Only made to ElevenLabs for audio generation
-- **Offline Playback**: Cached audio works without internet
+- Your API key is stored only in your browser
+- Audio files can be stored locally (optional)
+- No personal data is collected by Voice Board
+- All audio generation is processed by ElevenLabs' secure API
 
-## 🛠️ Development
+## 🙏 Credits
 
-### Project Structure
-```
-src/
-├── components/
-│   ├── Grid/          # Grid components
-│   ├── Modals/        # Settings and edit modals
-│   ├── Navigation/    # Navigation panel
-│   └── Common/        # Shared components
-├── services/          # ElevenLabs and storage services
-├── hooks/             # Custom React hooks
-├── utils/             # Constants and helpers
-└── styles/            # CSS files
-```
+Voice Board uses:
+- **[ElevenLabs](https://elevenlabs.io/)** - Advanced AI voice synthesis with v3 Turbo model
+- Their cutting-edge emotional audio tag system for expressive speech
+- AI-powered sound effect and music generation
 
-### Available Scripts
+## 📧 Support
 
-- `npm start` - Development server
-- `npm run build` - Production build
-- `npm test` - Run tests
-- `npm run eject` - Eject from Create React App
-
-### Key Dependencies
-
-- **React** - UI framework
-- **axios** - HTTP client for API calls
-- **lucide-react** - Icons
-- **@emotion/react** - CSS-in-JS styling
-
-## 🤝 Contributing
-
-This project was created as an assistive technology tool. Contributions that improve accessibility, add new features, or fix bugs are welcome.
-
-## 📄 License
-
-This project is open source and available under the MIT License.
-
-## 🆘 Support
-
-For technical support or feature requests, please create an issue in the project repository.
+For questions or issues, please visit the [GitHub repository](https://github.com/mull2536/voice-board).
 
 ---
 
-**Made with ❤️ for improving communication accessibility**
+**Voice Board** - Making communication accessible and expressive for everyone
