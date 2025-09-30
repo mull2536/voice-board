@@ -271,12 +271,20 @@ export function useAudio(settings) {
    */
   const generateSoundEffect = useCallback(async (buttonData) => {
 
+    const options = {
+      loop: buttonData.loop || false
+    };
+
+    // Only add duration if it's set and > 0
+    // If duration is 0 (None), don't pass it - let the model decide
+    if (buttonData.duration && buttonData.duration > 0) {
+      options.duration = buttonData.duration;
+    }
+    // If duration is 0 or undefined, don't pass duration parameter at all
+
     const audioBlob = await elevenLabsService.current.generateSoundEffect(
       buttonData.content,
-      {
-        duration: buttonData.duration || 5,
-        loop: buttonData.loop || false
-      }
+      options
     );
     return audioBlob;
   }, []);
