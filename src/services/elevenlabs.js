@@ -34,7 +34,7 @@ class ElevenLabsService {
   async textToSpeech(text, voiceId = 'pNInz6obpgDQGcFmaJgB', options = {}) {
     try {
       const {
-        modelId = 'eleven_v3', // Use eleven_v3 model
+        modelId = 'eleven_v4',
         outputFormat = 'mp3_44100_128',
         voiceSettings = {
           stability: 0.5,

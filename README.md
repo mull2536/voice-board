@@ -26,8 +26,7 @@ Voice Board is a communication aid designed for people with speech or motor limi
 4. **Choose your voice**: Or leave default voice on
 5. **Start using**: Click buttons to generate audio instantly
 
-The app uses Elevenlabs v3 model, which is currently in alpha. 
-Using your cloned voice may sound differently. 
+The app uses the ElevenLabs v4 model.
 
 ## 📖 User Guide
 
@@ -52,7 +51,7 @@ Using your cloned voice may sound differently.
 ### Button Types
 
 #### 🗣️ Speech with Emotional Expression
-Powered by **ElevenLabs v3 Turbo model**, which supports advanced emotional audio tags for natural, expressive speech:
+Powered by **ElevenLabs v4**, which supports advanced emotional audio tags for natural, expressive speech:
 
 - Add emotions using square bracket tags
 - Supported emotions include:
@@ -155,7 +154,7 @@ ElevenLabs AI composes original music from text prompts:
 ## 🙏 Credits
 
 Voice Board uses:
-- **[ElevenLabs](https://elevenlabs.io/)** - Advanced AI voice synthesis with v3 Turbo model
+- **[ElevenLabs](https://elevenlabs.io/)** - Advanced AI voice synthesis with the v4 model
 - Their cutting-edge emotional audio tag system for expressive speech
 - AI-powered sound effect and music generation
 

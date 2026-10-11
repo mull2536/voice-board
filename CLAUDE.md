@@ -2,7 +2,7 @@
 
 ## Project Description
 
-A React-based voice command board application designed to assist users with communication needs through an intuitive grid interface. The application integrates with ElevenLabs API v3 to provide text-to-speech with emotional audio tags, sound effects generation, and music composition.
+A React-based voice command board application designed to assist users with communication needs through an intuitive grid interface. The application integrates with ElevenLabs v4 model to provide text-to-speech with emotional audio tags, sound effects generation, and music composition.
 
 ## Key Features
 
